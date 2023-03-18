@@ -137,6 +137,14 @@ func (rb *Builder) Param(key string, values ...string) *Builder {
 	return rb
 }
 
+// Param sets multiple query paremeters on a request.
+func (rb *Builder) Params(m map[string][]string) *Builder {
+	for k, v := range m {
+		rb.Param(k, v...)
+	}
+	return rb
+}
+
 // Header sets a header on a request. It overwrites the existing values of a key.
 func (rb *Builder) Header(key string, values ...string) *Builder {
 	rb.headers = append(rb.headers, multimap{key, values})
